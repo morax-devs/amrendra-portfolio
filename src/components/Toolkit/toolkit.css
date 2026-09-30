@@ -1,0 +1,133 @@
+/* ==========================================================================
+   TECHNICAL TOOLKIT SECTION STYLING (CLEAN TYPOGRAPHIC GRID)
+   ========================================================================== */
+
+.toolkit-section {
+  position: relative;
+  padding: 120px 24px 140px 24px;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 2;
+}
+
+.toolkit-intro {
+  margin-bottom: 70px;
+  max-width: 600px;
+}
+
+.toolkit-heading {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.toolkit-subheading {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* 4-Column Typographic Grid */
+.toolkit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+}
+
+.toolkit-column {
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-medium);
+  transition: border-color var(--transition-normal);
+}
+
+.toolkit-column:hover {
+  border-top-color: var(--accent-blue);
+}
+
+.column-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.column-number {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 0.1em;
+}
+
+.column-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+/* Skills Typographic List */
+.skills-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.skill-item:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.skill-item:hover .skill-bullet {
+  background-color: var(--accent-blue);
+}
+
+.skill-bullet {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--text-tertiary);
+  transition: background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.skill-name {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .toolkit-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 36px;
+  }
+}
+
+@media (max-width: 600px) {
+  .toolkit-section {
+    padding: 90px 20px 100px 20px;
+  }
+
+  .toolkit-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

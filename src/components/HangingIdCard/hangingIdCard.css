@@ -1,0 +1,650 @@
+/* ==========================================================================
+   HANGING ID CARD & ELASTOMER LANYARD STYLING
+   ========================================================================== */
+
+.hanging-card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  overflow: visible;
+  user-select: none;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   LANYARD STRING SVG CANVAS
+   -------------------------------------------------------------------------- */
+.string-svg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: visible;
+}
+
+/* Woven strap outer edges (clean selvage border) */
+.lanyard-strap-edge {
+  fill: none;
+  stroke: #1e212a;
+  stroke-width: 16px;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* The continuous flexible student ID lanyard strap (matte woven charcoal ribbon) */
+.lanyard-string {
+  fill: none;
+  stroke: #313543;
+  stroke-width: 13px;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+  pointer-events: stroke;
+  cursor: grab;
+}
+
+.lanyard-string.grabbing {
+  cursor: grabbing;
+}
+
+.lanyard-string-shadow {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.5);
+  stroke-width: 16px;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+
+/* --------------------------------------------------------------------------
+   REALISTIC AMBIENT CAST SHADOW
+   -------------------------------------------------------------------------- */
+.card-dynamic-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 270px;
+  height: 405px;
+  margin-left: -135px; /* Center horizontally relative to attachment pin */
+  margin-top: 23px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    transparent 80%
+  );
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 2;
+  will-change: transform, opacity;
+}
+
+/* --------------------------------------------------------------------------
+   PHYSICAL ID CARD CONTAINER
+   -------------------------------------------------------------------------- */
+.id-card-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 270px;
+  margin-left: -135px; /* Centers the top clip directly beneath the string */
+  z-index: 20;
+  cursor: grab;
+  transform-origin: top center;
+  will-change: transform;
+  transform-style: preserve-3d;
+  touch-action: none;
+}
+
+.id-card-container.grabbing {
+  cursor: grabbing;
+}
+
+/* --------------------------------------------------------------------------
+   HARDWARE CLIP ASSEMBLY (TOP FASTENER)
+   -------------------------------------------------------------------------- */
+.clip-assembly {
+  position: absolute;
+  top: -2px; /* Top ferrule securely clamps over the strap endpoint at y = 0 */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 25;
+  pointer-events: none;
+}
+
+/* Metal crimp ferrule where the thick lanyard strap terminates */
+.clip-ferrule {
+  width: 22px; /* Proportional to 18px strap */
+  height: 11px;
+  background: linear-gradient(90deg, #25262e 0%, #686b7c 50%, #1e1f26 100%);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Matte gunmetal swivel body */
+.clip-swivel {
+  width: 24px;
+  height: 15px;
+  background: linear-gradient(135deg, #3d404c 0%, #20222a 100%);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.swivel-groove {
+  width: 14px;
+  height: 1.5px;
+  background: #111216;
+  border-radius: 1px;
+}
+
+/* Dark steel latch hook passing through the card's punched slot */
+.clip-hook {
+  width: 18px;
+  height: 16px;
+  border: 2.8px solid #4a4d5c;
+  border-top: none;
+  border-radius: 0 0 7px 7px;
+  margin-top: -2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   PHYSICAL ID CARD BODY (30MIL COMPOSITE PVC)
+   -------------------------------------------------------------------------- */
+.id-card-body {
+  position: relative;
+  width: 270px;
+  height: 405px;
+  margin-top: 23px;
+  background: linear-gradient(155deg, #15161c 0%, #0d0e12 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.8),
+    0 12px 30px rgba(0, 0, 0, 0.65),
+    0 2px 6px rgba(0, 0, 0, 0.4);
+  padding: 22px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+/* Punch slot hole at top of card where clip hook attaches */
+.card-slot-punch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 8px;
+  background-color: #07080a;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.95);
+  z-index: 10;
+}
+
+/* Realistic specular sheen moving dynamically with card physics */
+.card-specular-sheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    var(--sheen-angle, 125deg),
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.03) 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.04) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 12;
+}
+
+/* Subtle micro-texture security pattern overlay */
+.card-security-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 8px 8px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   CARD HEADER
+   -------------------------------------------------------------------------- */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 5;
+}
+
+.card-brand {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.brand-dot {
+  width: 5px;
+  height: 5px;
+  background-color: var(--accent-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-blue);
+}
+
+.brand-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #c4c5cf;
+}
+
+.card-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 4.5px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.status-indicator {
+  width: 4px;
+  height: 4px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+.status-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #9da0ae;
+}
+
+/* --------------------------------------------------------------------------
+   CARD MIDDLE SECTION: PHOTO + EMV SMART CHIP
+   -------------------------------------------------------------------------- */
+.card-middle {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  position: relative;
+  z-index: 5;
+  margin-bottom: 14px;
+}
+
+.card-photo-wrapper {
+  position: relative;
+  width: 104px;
+  flex-shrink: 0;
+}
+
+.card-photo {
+  width: 100%;
+  height: 116px;
+  background: #111216;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.card-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.avatar-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.photo-tag {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #adb0be;
+}
+
+/* Subtle corner framing brackets around photo */
+.corner-bracket {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+}
+
+.corner-bracket.top-left {
+  top: -2px;
+  left: -2px;
+  border-top: 1.5px solid var(--accent-blue);
+  border-left: 1.5px solid var(--accent-blue);
+}
+
+.corner-bracket.bottom-right {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Right metrics column */
+.card-id-metrics {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Realistic Gold EMV Smart Chip */
+.emv-chip {
+  width: 38px;
+  height: 30px;
+  background: linear-gradient(135deg, #d4af37 0%, #aa8420 50%, #f3e5ab 75%, #8b6814 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.chip-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.chip-trace {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.chip-trace-left {
+  top: 0;
+  bottom: 0;
+  left: 9px;
+  width: 1px;
+}
+
+.chip-trace-right {
+  top: 0;
+  bottom: 0;
+  right: 9px;
+  width: 1px;
+}
+
+.id-code-block {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.code-label {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.code-value {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #d1d3df;
+}
+
+/* --------------------------------------------------------------------------
+   PRIMARY CREDENTIALS (NAME & DISCIPLINE)
+   -------------------------------------------------------------------------- */
+.card-credentials {
+  margin-top: 2px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 5;
+}
+
+.card-subject-name {
+  font-family: var(--font-sans);
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.card-subject-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #9295a5;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   DISCIPLINE TAGS
+   -------------------------------------------------------------------------- */
+.card-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 5;
+}
+
+.card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #b7b9c9;
+}
+
+.card-tag-separator {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #434552;
+}
+
+/* --------------------------------------------------------------------------
+   HOLOGRAPHIC SECURITY RIBBON
+   -------------------------------------------------------------------------- */
+.card-security-strip {
+  width: calc(100% + 36px);
+  margin-left: -18px;
+  height: 14px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(80, 160, 255, 0.15) 25%,
+    rgba(200, 140, 255, 0.15) 50%,
+    rgba(90, 240, 180, 0.15) 75%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  margin-bottom: 10px;
+}
+
+.holographic-foil {
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.46rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   BOTTOM AUTHENTICATION FOOTER
+   -------------------------------------------------------------------------- */
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 5;
+  padding-top: 4px;
+}
+
+.card-barcode {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.barcode-svg {
+  width: 155px;
+  height: 22px;
+  display: block;
+}
+
+.barcode-numbers {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  color: #636573;
+}
+
+.nfc-glyph {
+  opacity: 0.65;
+  padding-bottom: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN FOR ID CARD
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .hanging-card-wrapper {
+    min-height: 520px;
+  }
+
+  .id-card-container {
+    width: 250px;
+    margin-left: -125px;
+  }
+
+  .id-card-body {
+    width: 250px;
+    height: 380px;
+    padding: 20px 16px 14px 16px;
+  }
+
+  .card-photo-wrapper {
+    width: 92px;
+  }
+
+  .card-photo {
+    height: 106px;
+  }
+
+  .card-subject-name {
+    font-size: 1rem;
+  }
+
+  .barcode-svg {
+    width: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hanging-card-wrapper {
+    min-height: 480px;
+    margin-top: 10px;
+  }
+
+  .id-card-container {
+    width: 240px;
+    margin-left: -120px;
+  }
+
+  .id-card-body {
+    width: 240px;
+    height: 365px;
+    padding: 18px 14px 12px 14px;
+  }
+
+  .card-photo-wrapper {
+    width: 86px;
+  }
+
+  .card-photo {
+    height: 98px;
+  }
+
+  .barcode-svg {
+    width: 130px;
+  }
+}

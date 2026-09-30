@@ -1,0 +1,174 @@
+/* ==========================================================================
+   CONTACT SECTION STYLING (EDITORIAL TYPOGRAPHY & DIRECT CHANNELS)
+   ========================================================================== */
+
+.contact-section {
+  position: relative;
+  padding: 130px 24px 150px 24px;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 2;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+/* Left Column: Heading & Description */
+.contact-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-heading {
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.contact-description {
+  font-size: 1.18rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin-bottom: 40px;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-btn {
+  padding: 14px 28px;
+  font-size: 0.88rem;
+}
+
+.copy-email-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 16px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.copy-email-btn:hover {
+  border-color: var(--border-medium);
+  background-color: var(--bg-surface-elevated);
+}
+
+.copy-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 0.1em;
+}
+
+.copy-val {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Right Column: Direct Channels */
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.channels-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.channels-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  text-decoration: none;
+  transition: padding-left var(--transition-fast);
+}
+
+.channel-row:first-child {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.channel-row:hover {
+  padding-left: 8px;
+}
+
+.channel-row:hover .channel-handle {
+  color: #ffffff;
+}
+
+.channel-row:hover .channel-arrow {
+  color: var(--accent-blue);
+  transform: translate(3px, -3px);
+}
+
+.channel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.channel-type {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+.channel-handle {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.channel-arrow {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contact-section {
+    padding: 90px 20px 100px 20px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}

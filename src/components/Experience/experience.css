@@ -1,0 +1,217 @@
+/* ==========================================================================
+   EXPERIENCE & MILESTONES SECTION STYLING (UNDERSTATED VERTICAL TIMELINE)
+   ========================================================================== */
+
+.experience-section {
+  position: relative;
+  padding: 120px 24px 140px 24px;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 2;
+}
+
+.experience-intro {
+  margin-bottom: 80px;
+  max-width: 600px;
+}
+
+.experience-heading {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.experience-subheading {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Vertical Timeline Track */
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  padding-left: 20px;
+}
+
+.timeline-track {
+  position: absolute;
+  top: 10px;
+  bottom: 20px;
+  left: 170px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--border-medium) 0%,
+    var(--border-medium) 85%,
+    transparent 100%
+  );
+}
+
+/* Dynamic Electric-Blue Laser Track */
+.timeline-track-laser {
+  position: absolute;
+  top: 10px;
+  left: 170px;
+  width: 2px;
+  margin-left: -0.5px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-blue) 0%,
+    #60a5fa 85%,
+    #ffffff 100%
+  );
+  box-shadow: 0 0 10px rgba(45, 112, 246, 0.8), 0 0 18px rgba(45, 112, 246, 0.4);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 1px;
+}
+
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+/* Timeline Node */
+.timeline-node {
+  position: absolute;
+  left: 170px;
+  top: 6px;
+  transform: translateX(-50%);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all var(--transition-fast);
+}
+
+.timeline-item:hover .timeline-node,
+.timeline-item.is-active .timeline-node {
+  border-color: #60a5fa;
+  box-shadow: 0 0 12px rgba(45, 112, 246, 0.7);
+  transform: translateX(-50%) scale(1.12);
+}
+
+.node-core {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--text-tertiary);
+  transition: all var(--transition-fast);
+}
+
+.timeline-item:hover .node-core,
+.timeline-item.is-active .node-core {
+  background-color: #ffffff;
+  box-shadow: 0 0 8px #60a5fa;
+}
+
+.timeline-item.is-active .timeline-tag {
+  color: #60a5fa;
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+}
+
+/* Timeline Meta (Year & Tag) */
+.timeline-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 6px;
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.timeline-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent-blue);
+}
+
+/* Content Details */
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.timeline-entity {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #c9cdd4;
+  margin-bottom: 14px;
+}
+
+.timeline-description {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 620px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline-container {
+    padding-left: 0;
+  }
+
+  .timeline-track {
+    left: 8px;
+  }
+
+  .timeline-track-laser {
+    left: 8px;
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    padding-left: 36px;
+    gap: 10px;
+  }
+
+  .timeline-node {
+    left: 8px;
+    top: 4px;
+  }
+
+  .timeline-meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+  }
+}

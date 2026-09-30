@@ -1,0 +1,460 @@
+/* ==========================================================================
+   FEATURED PROJECTS SECTION STYLING (EDITORIAL ALTERNATING LAYOUT)
+   ========================================================================== */
+
+.projects-section {
+  position: relative;
+  padding: 120px 24px 140px 24px;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 2;
+}
+
+.projects-intro {
+  margin-bottom: 90px;
+  max-width: 680px;
+}
+
+.projects-heading {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.projects-subheading {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Projects List & Alternating Grid */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 130px;
+}
+
+.project-entry {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.project-entry.is-reversed {
+  grid-template-columns: 1.15fr 1fr;
+}
+
+.project-entry.is-reversed .project-details {
+  order: 2;
+}
+
+.project-entry.is-reversed .project-preview-wrap {
+  order: 1;
+}
+
+/* Project Details Column */
+.project-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-meta-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.project-category {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+}
+
+.project-title {
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+
+.project-description {
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+  margin-bottom: 26px;
+  max-width: 520px;
+}
+
+.project-technologies {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 34px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.tech-item {
+  color: #c9cdd4;
+}
+
+.tech-separator {
+  color: var(--text-tertiary);
+}
+
+/* Project Actions */
+.project-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  transition: all var(--transition-normal);
+}
+
+.project-link-primary {
+  color: var(--text-primary);
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.project-link-primary:hover {
+  color: #ffffff;
+  border-bottom-color: var(--accent-blue);
+}
+
+.project-link-subtle {
+  color: var(--text-secondary);
+}
+
+.project-link-subtle:hover {
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   VISUAL PREVIEWS AREA
+   -------------------------------------------------------------------------- */
+.project-preview-wrap {
+  width: 100%;
+}
+
+.project-preview-card {
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.project-preview-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+}
+
+.preview-canvas {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  min-height: 290px;
+  justify-content: space-between;
+}
+
+/* Common HUD Headers & Footers */
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hud-tag {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.hud-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   01: LUMA PREVIEW STYLING (REAL WEBSITE IN BROWSER FRAME)
+   -------------------------------------------------------------------------- */
+.preview-luma-browser {
+  padding: 18px 20px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: auto;
+  justify-content: flex-start;
+}
+
+.luma-screenshot-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-top: none;
+  background-color: #0f1f28; /* Matches Luma's authentic dark teal sidebar */
+  margin-bottom: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.luma-screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* Trims the bottom 16px browser status bar cleanly */
+  clip-path: inset(0 0 16px 0);
+  margin-bottom: -16px;
+  transition: transform var(--transition-normal);
+}
+
+.project-preview-card:hover .luma-screenshot-img {
+  transform: scale(1.02);
+}
+
+.luma-hud-footer {
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   02: BOBFORGE PREVIEW STYLING (REAL APP IN BROWSER FRAME)
+   -------------------------------------------------------------------------- */
+.preview-bobforge-browser {
+  padding: 18px 20px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: auto;
+  justify-content: flex-start;
+}
+
+.bobforge-screenshot-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-top: none;
+  background-color: #0d1520; /* Matches BobForge dark slate IDE theme */
+  margin-bottom: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.bobforge-screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.project-preview-card:hover .bobforge-screenshot-img {
+  transform: scale(1.02);
+}
+
+.bobforge-hud-footer {
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   03: WEB SCRAPER PREVIEW STYLING (AUTHENTIC SCREENSHOT SHOWCASE FRAME)
+   -------------------------------------------------------------------------- */
+.preview-scraper-showcase {
+  padding: 18px 20px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: auto;
+  justify-content: flex-start;
+}
+
+.scraper-screenshot-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background-color: #0a0d14;
+  margin-bottom: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.scraper-screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.project-preview-card:hover .scraper-screenshot-img {
+  transform: scale(1.02);
+}
+
+.scraper-hud-footer {
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   04: HOMETOWN HOMEPAGE PREVIEW STYLING (BROWSER COMPOSITION)
+   -------------------------------------------------------------------------- */
+.browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-surface-elevated);
+  padding: 8px 12px;
+  border-radius: 6px 6px 0 0;
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.dot-close { background-color: rgba(255, 95, 87, 0.7); }
+.dot-min { background-color: rgba(254, 188, 46, 0.7); }
+.dot-max { background-color: rgba(40, 200, 64, 0.7); }
+
+.browser-address {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+
+.lock-icon {
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+.browser-menu {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   04: HOMETOWN HOMEPAGE (DISCOVER PRAYAGRAJ) PREVIEW STYLING
+   -------------------------------------------------------------------------- */
+.preview-hometown-browser {
+  padding: 18px 20px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: auto;
+  justify-content: flex-start;
+}
+
+.hometown-screenshot-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-top: none;
+  background-color: #0c0e14;
+  margin-bottom: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.hometown-screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.project-preview-card:hover .hometown-screenshot-img {
+  transform: scale(1.02);
+}
+
+.hometown-hud-footer {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .projects-section {
+    padding: 90px 20px 100px 20px;
+  }
+
+  .projects-list {
+    gap: 90px;
+  }
+
+  .project-entry,
+  .project-entry.is-reversed {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .project-entry.is-reversed .project-details {
+    order: 1;
+  }
+
+  .project-entry.is-reversed .project-preview-wrap {
+    order: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-navlinks {
+    display: none;
+  }
+}

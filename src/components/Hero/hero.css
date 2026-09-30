@@ -68,6 +68,12 @@
   color: var(--text-primary);
   margin-bottom: 24px;
   max-width: 600px;
+  cursor: default;
+}
+
+.hero-heading .cipher-scramble {
+  font-variant-numeric: tabular-nums;
+  display: inline;
 }
 
 .hero-heading .highlight-text {
@@ -84,6 +90,8 @@
   max-width: 520px;
   margin-bottom: 38px;
   font-weight: 400;
+  min-height: 3.8rem;
+  cursor: default;
 }
 
 /* Action Buttons */

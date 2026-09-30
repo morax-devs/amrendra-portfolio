@@ -1,28 +1,54 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-const CIPHER_GLYPHS = '0123456789ABCDEF$#%&*<>[]/\\~!=_+';
+const UPPER_GLYPHS = '0123456789ABCDEF$#%&*<>[]/\\~!=_+';
+const LOWER_GLYPHS = '0123456789abcdefxkz#_~+=;:-';
+
+/**
+ * Returns a randomized cybernetic glyph matching the character type
+ * to prevent layout shifts or line-wrap jumps on sentences.
+ */
+function getCyberGlyph(char) {
+  if (char === ' ') return ' ';
+  if (/[A-Z]/.test(char)) {
+    return UPPER_GLYPHS[Math.floor(Math.random() * UPPER_GLYPHS.length)];
+  }
+  if (/[a-z]/.test(char)) {
+    return LOWER_GLYPHS[Math.floor(Math.random() * LOWER_GLYPHS.length)];
+  }
+  if (/[0-9]/.test(char)) {
+    return String(Math.floor(Math.random() * 10));
+  }
+  if (/[,.\-_/]/.test(char)) {
+    return char;
+  }
+  return UPPER_GLYPHS[Math.floor(Math.random() * UPPER_GLYPHS.length)];
+}
 
 /**
  * CipherScramble Component
  * 
  * Provides a high-speed cybernetic terminal decryption effect when the element
- * scrolls into the viewport. Monospace characters cycle through randomized glyphs
+ * scrolls into the viewport. Characters cycle through randomized glyphs
  * before locking permanently into the target text from left to right.
  * 
  * Features:
- * - IntersectionObserver trigger: Starts automatically when ~15% visible in viewport.
+ * - IntersectionObserver trigger: Starts automatically when visible in viewport.
+ * - Staggered delay: Allows cascade chains across multiple hero elements.
+ * - External triggerSignal: Allows parent containers (like buttons or headings) to trigger decryption.
  * - Progressive lock-in: Sweep resolves characters cleanly without horizontal layout shift.
  * - Interactive hover: Re-triggers subtle decryption scramble when hovered.
  * - Accessible: aria-label contains the pure un-scrambled target string.
  */
 export default function CipherScramble({
-  text,
+  text = '',
   as: Component = 'span',
   className = '',
   triggerOnce = true,
-  scrambleSpeed = 24, // ms per tick
+  scrambleSpeed = 22, // ms per tick
   cyclesPerChar = 2, // how many random glyphs each char flashes before locking
   interactive = true,
+  delay = 0,
+  triggerSignal,
   ...props
 }) {
   const [displayText, setDisplayText] = useState(text);
@@ -30,6 +56,7 @@ export default function CipherScramble({
   const isScramblingRef = useRef(false);
   const hasTriggeredRef = useRef(false);
   const intervalIdRef = useRef(null);
+  const timeoutIdRef = useRef(null);
 
   const startScramble = useCallback(() => {
     if (isScramblingRef.current) return;
@@ -53,17 +80,10 @@ export default function CipherScramble({
       const scrambled = originalText
         .split('')
         .map((char, index) => {
-          // Preserve spaces unconditionally
-          if (char === ' ') return ' ';
-
-          // Characters before lockedCount are locked into their actual target character
           if (index < lockedCount) {
             return originalText[index];
           }
-
-          // Random cybernetic glyph from the pool
-          const randomGlyph = CIPHER_GLYPHS[Math.floor(Math.random() * CIPHER_GLYPHS.length)];
-          return randomGlyph;
+          return getCyberGlyph(char);
         })
         .join('');
 
@@ -79,6 +99,18 @@ export default function CipherScramble({
   }, [text, cyclesPerChar, scrambleSpeed]);
 
   useEffect(() => {
+    setDisplayText(text);
+  }, [text]);
+
+  // Support parent-driven trigger signals (e.g. button hover or section hover)
+  useEffect(() => {
+    if (triggerSignal) {
+      if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+      startScramble();
+    }
+  }, [triggerSignal, startScramble]);
+
+  useEffect(() => {
     const el = elementRef.current;
     if (!el) return;
 
@@ -88,7 +120,14 @@ export default function CipherScramble({
           if (entry.isIntersecting) {
             if (!hasTriggeredRef.current || !triggerOnce) {
               hasTriggeredRef.current = true;
-              startScramble();
+              if (delay > 0) {
+                if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+                timeoutIdRef.current = setTimeout(() => {
+                  startScramble();
+                }, delay);
+              } else {
+                startScramble();
+              }
             }
             if (triggerOnce) {
               observer.unobserve(el);
@@ -106,14 +145,14 @@ export default function CipherScramble({
 
     return () => {
       observer.disconnect();
-      if (intervalIdRef.current) {
-        clearInterval(intervalIdRef.current);
-      }
+      if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+      if (intervalIdRef.current) clearInterval(intervalIdRef.current);
     };
-  }, [startScramble, triggerOnce]);
+  }, [startScramble, triggerOnce, delay]);
 
   const handleMouseEnter = () => {
     if (interactive && !isScramblingRef.current) {
+      if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
       startScramble();
     }
   };

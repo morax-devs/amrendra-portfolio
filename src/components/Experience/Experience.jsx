@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import CipherScramble from '../common/CipherScramble';
 import './experience.css';
 
@@ -6,45 +6,61 @@ import './experience.css';
  * Experience & Milestones Section
  * 
  * Clean, understated vertical timeline:
- * - Dynamic scroll-drawn laser beam track
- * - Illuminated milestone nodes upon contact
+ * - Dynamic scroll-drawn laser beam track running at 60/120fps via requestAnimationFrame
+ * - Zero React re-renders during scroll to ensure rock-solid stability and zero layout vanishes
+ * - Illuminated milestone nodes and glowing badges upon laser contact
  * - Refined typography and authentic delivery
  */
 export default function Experience() {
   const containerRef = useRef(null);
-  const [laserHeight, setLaserHeight] = useState(0);
-  const [activeIndices, setActiveIndices] = useState(new Set());
+  const laserRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
+    let rafId = null;
+
+    const updateLaser = () => {
+      if (!containerRef.current || !laserRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const windowH = window.innerHeight;
 
-      // Start drawing when the timeline top enters 65% down the viewport
-      const triggerY = windowH * 0.65;
+      // Start drawing when the timeline top enters 70% down the viewport
+      const triggerY = windowH * 0.7;
       const relativeTop = triggerY - rect.top;
       const containerH = rect.height;
 
       const progress = Math.max(0, Math.min(1, relativeTop / containerH));
       const currentLaserPx = progress * containerH;
-      setLaserHeight(currentLaserPx);
+
+      laserRef.current.style.height = `${currentLaserPx}px`;
 
       // Check which milestone items the laser line has reached
       const items = containerRef.current.querySelectorAll('.timeline-item');
-      const active = new Set();
-      items.forEach((item, index) => {
+      items.forEach((item) => {
         const itemTop = item.offsetTop;
         if (currentLaserPx >= itemTop + 10) {
-          active.add(index);
+          item.classList.add('is-active');
+        } else {
+          item.classList.remove('is-active');
         }
       });
-      setActiveIndices(active);
+    };
+
+    const handleScroll = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateLaser);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll, { passive: true });
+    
+    // Immediate initial measurement
+    updateLaser();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const milestones = [
@@ -101,18 +117,17 @@ export default function Experience() {
           <div className="timeline-track" />
           {/* Dynamic Laser Beam Line */}
           <div 
+            ref={laserRef}
             className="timeline-track-laser" 
-            style={{ height: `${laserHeight}px` }} 
             aria-hidden="true" 
           />
 
           <div className="timeline-items">
             {milestones.map((item, index) => {
-              const isActive = activeIndices.has(index);
               return (
                 <div 
                   key={index} 
-                  className={`timeline-item reveal-on-scroll ${isActive ? 'is-active' : ''}`}
+                  className={`timeline-item reveal-on-scroll stagger-${index + 1}`}
                 >
                   {/* Node Dot on the Vertical Line */}
                   <div className="timeline-node">

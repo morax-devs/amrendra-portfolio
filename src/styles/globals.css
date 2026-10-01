@@ -149,7 +149,8 @@ button {
   will-change: opacity, transform;
 }
 
-.reveal-on-scroll.is-revealed {
+.reveal-on-scroll.is-revealed,
+.reveal-on-scroll[data-revealed="true"] {
   opacity: 1;
   transform: translateY(0);
 }
@@ -164,7 +165,8 @@ button {
   will-change: opacity, transform;
 }
 
-.reveal-card.is-revealed {
+.reveal-card.is-revealed,
+.reveal-card[data-revealed="true"] {
   opacity: 1;
   transform: translateY(0) scale(1);
 }

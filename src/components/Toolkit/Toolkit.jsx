@@ -55,7 +55,7 @@ export default function Toolkit() {
         </div>
 
         {/* Heading */}
-        <div className="toolkit-intro reveal-on-scroll">
+        <div className="toolkit-intro scroll-focus-item">
           <h2 className="toolkit-heading">TECHNICAL TOOLKIT</h2>
           <p className="toolkit-subheading">
             Core technologies, libraries, and frameworks I use to engineer software and AI systems.
@@ -63,9 +63,9 @@ export default function Toolkit() {
         </div>
 
         {/* Typographic 4-Column Grid */}
-        <div className="toolkit-grid">
-          {skillGroups.map((group, index) => (
-            <div key={group.id} className={`toolkit-column reveal-card stagger-${index + 1}`}>
+        <div className="toolkit-grid scroll-focus-item">
+          {skillGroups.map((group) => (
+            <div key={group.id} className="toolkit-column">
               <div className="column-header">
                 <span className="column-number">{group.id}</span>
                 <h3 className="column-title">{group.title}</h3>

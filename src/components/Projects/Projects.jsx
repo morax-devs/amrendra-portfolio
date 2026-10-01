@@ -81,7 +81,7 @@ export default function Projects() {
         </div>
 
         {/* Section Intro */}
-        <div className="projects-intro reveal-on-scroll">
+        <div className="projects-intro scroll-focus-item">
           <h2 className="projects-heading">FEATURED PROJECTS</h2>
           <p className="projects-subheading">
             A selection of things I've built, experimented with, and learned from.
@@ -96,7 +96,7 @@ export default function Projects() {
             return (
               <article 
                 key={proj.id} 
-                className={`project-entry reveal-card ${isReversed ? 'is-reversed' : ''}`}
+                className={`project-entry scroll-focus-item ${isReversed ? 'is-reversed' : ''}`}
               >
                 {/* Details Column */}
                 <div className="project-details">

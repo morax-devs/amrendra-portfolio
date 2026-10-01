@@ -8,6 +8,7 @@ import Experience from './components/Experience/Experience';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import { useScrollReveal } from './hooks/useScrollReveal';
+import { useScrollFocusWindow } from './hooks/useScrollFocusWindow';
 
 /**
  * Main Application Component
@@ -23,8 +24,11 @@ import { useScrollReveal } from './hooks/useScrollReveal';
  * - Footer (Minimal identity, links, copyright)
  */
 export default function App() {
-  // Activate automatic scroll entrance animations for all .reveal-on-scroll and .reveal-card elements
+  // Activate automatic scroll entrance animations
   useScrollReveal('.reveal-on-scroll, .reveal-card');
+
+  // Activate bi-directional Focus Window starting from About section
+  useScrollFocusWindow('.scroll-focus-item');
 
   return (
     <div className="portfolio-app">

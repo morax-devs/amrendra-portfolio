@@ -104,7 +104,7 @@ export default function Experience() {
         </div>
 
         {/* Section Intro */}
-        <div className="experience-intro reveal-on-scroll">
+        <div className="experience-intro scroll-focus-item">
           <h2 className="experience-heading">EXPERIENCE & MILESTONES</h2>
           <p className="experience-subheading">
             Practical development experience, competitive hackathons, and technical initiatives.
@@ -127,7 +127,7 @@ export default function Experience() {
               return (
                 <div 
                   key={index} 
-                  className={`timeline-item reveal-on-scroll stagger-${index + 1}`}
+                  className="timeline-item scroll-focus-item"
                 >
                   {/* Node Dot on the Vertical Line */}
                   <div className="timeline-node">

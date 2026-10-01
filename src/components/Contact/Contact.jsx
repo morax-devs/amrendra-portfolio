@@ -38,7 +38,7 @@ export default function Contact() {
 
         <div className="contact-grid">
           {/* Main Editorial Statement */}
-          <div className="contact-main reveal-on-scroll">
+          <div className="contact-main scroll-focus-item">
             <h2 className="contact-heading">
               LET'S BUILD<br />
               SOMETHING.
@@ -75,7 +75,7 @@ export default function Contact() {
           </div>
 
           {/* Direct Channels Column */}
-          <div className="contact-channels reveal-on-scroll stagger-2">
+          <div className="contact-channels scroll-focus-item">
             <span className="channels-title">DIRECT CHANNELS</span>
 
             <div className="channels-list">

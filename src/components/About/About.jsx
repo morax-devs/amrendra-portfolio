@@ -23,9 +23,9 @@ export default function About() {
           <div className="section-divider-line" />
         </div>
 
-        <div className="about-grid">
+        <div className="about-grid scroll-focus-item">
           {/* Left Column: Typography & Supporting Identity */}
-          <div className="about-left reveal-on-scroll">
+          <div className="about-left">
             <h2 className="about-heading">
               A LITTLE<br />
               ABOUT ME
@@ -37,7 +37,7 @@ export default function About() {
           </div>
 
           {/* Right Column: Narrative & Compact Information */}
-          <div className="about-right reveal-on-scroll stagger-2">
+          <div className="about-right">
             <div className="about-narrative">
               <p className="about-paragraph">
                 I'm a third-year undergraduate specializing in Computer Science and Engineering,

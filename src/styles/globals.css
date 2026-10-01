@@ -178,12 +178,60 @@ button {
 .stagger-4 { transition-delay: 320ms; }
 .stagger-5 { transition-delay: 400ms; }
 
+/* ==========================================================================
+   SCROLL FOCUS WINDOW ANIMATIONS (BI-DIRECTIONAL FADE & SOFT FLOAT)
+   ========================================================================== */
+
+.scroll-focus-item {
+  opacity: 0.12;
+  transform: translateY(24px);
+  transition:
+    opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Approaching from bottom */
+.scroll-focus-item.is-below,
+.scroll-focus-item[data-focus-state="below"] {
+  opacity: 0.12;
+  transform: translateY(24px);
+  pointer-events: none;
+}
+
+/* Active reading focus sweet spot */
+.scroll-focus-item.is-focused,
+.scroll-focus-item[data-focus-state="focused"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Scrolled past the top threshold */
+.scroll-focus-item.is-past,
+.scroll-focus-item[data-focus-state="past"] {
+  opacity: 0.10;
+  transform: translateY(-22px);
+  pointer-events: none;
+}
+
+/* Subtle peek interaction when hovering over a dimmed ghost item */
+.scroll-focus-item.is-below:hover,
+.scroll-focus-item.is-past:hover,
+.scroll-focus-item[data-focus-state="below"]:hover,
+.scroll-focus-item[data-focus-state="past"]:hover {
+  opacity: 0.35;
+  pointer-events: auto;
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll,
-  .reveal-card {
+  .reveal-card,
+  .scroll-focus-item {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+    pointer-events: auto !important;
   }
 }
